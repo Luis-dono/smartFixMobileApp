@@ -16,6 +16,12 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:targetApi="31">
         <activity
+            android:name=".telefonoForms_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".formularioTelefono_Activity"
+            android:exported="false" />
+        <activity
             android:name=".folioTelefono_Activity"
             android:exported="false" />
         <activity
