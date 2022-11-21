@@ -12,6 +12,7 @@
         android:layout_height="721dp"
         android:background="@drawable/shape"
         android:orientation="vertical"
+        android:padding= "16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
