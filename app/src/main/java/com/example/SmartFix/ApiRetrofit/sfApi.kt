@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 interface sfApi {
     companion object{
-        val instance = Retrofit.Builder().baseUrl("http://localhost:5010/").addConverterFactory(GsonConverterFactory.create()).client(
+        val instance = Retrofit.Builder().baseUrl("https://api-smartfixing.auplex.mx/").addConverterFactory(GsonConverterFactory.create()).client(
             OkHttpClient().newBuilder().build()
         ).build().create(sfApi::class.java)
     }

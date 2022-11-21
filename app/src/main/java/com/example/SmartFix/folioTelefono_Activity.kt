@@ -12,6 +12,7 @@ class folioTelefono_Activity : AppCompatActivity() {
     }
 
     fun onClick(view: View) {
-
+        val intent = Intent(this,telefonoForms_Activity::class.java)
+        startActivity(intent)
     }
 }
