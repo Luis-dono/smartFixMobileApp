@@ -4,11 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
-import com.example.SmartFix.R
-import com.example.smartFix.apiRetrofit.sfApi
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+
 
 class TelefonoFormsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
