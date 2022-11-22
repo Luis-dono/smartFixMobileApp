@@ -1,4 +1,4 @@
-package com.example.SmartFix
+package com.example.smartFix
 
 data class Detalle (    var folio:String,//pieza
                         val lote:String,//marca
