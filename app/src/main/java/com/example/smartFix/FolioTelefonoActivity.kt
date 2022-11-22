@@ -6,7 +6,7 @@ import android.view.View
 import android.widget.EditText
 
 
-class TelefonoFormsActivity : AppCompatActivity() {
+class FolioTelefonoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_folio_telefono)

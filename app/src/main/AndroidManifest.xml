@@ -16,7 +16,7 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:targetApi="31">
         <activity
-            android:name="com.example.smartFix.TelefonoFormsActivity"
+            android:name="com.example.smartFix.FolioTelefonoActivity"
             android:exported="false" />
         <activity
             android:name="com.example.smartFix.LoginActivity"

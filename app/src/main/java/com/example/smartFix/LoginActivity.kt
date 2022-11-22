@@ -13,7 +13,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun onClick(view: View) {
-        val intent = Intent(this,TelefonoFormsActivity::class.java)
+        val intent = Intent(this,FolioTelefonoActivity::class.java)
         startActivity(intent)
     }
 

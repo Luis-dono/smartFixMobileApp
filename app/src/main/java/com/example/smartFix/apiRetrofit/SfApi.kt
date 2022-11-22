@@ -8,12 +8,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Url
 
-interface sfApi {
+interface SfApi {
 
     companion object{
         val instance = Retrofit.Builder().baseUrl("https://api-smartfixing.auplex.mx/").addConverterFactory(GsonConverterFactory.create()).client(
             OkHttpClient().newBuilder().build()
-        ).build().create(sfApi::class.java)
+        ).build().create(SfApi::class.java)
     }
     @GET
     fun getTelefonoByFolio(@Url url:String):Response<DetalleResponse>
