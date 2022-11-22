@@ -15,6 +15,8 @@ interface SfApi {
             OkHttpClient().newBuilder().build()
         ).build().create(SfApi::class.java)
     }
+
     @GET
     fun getTelefonoByFolio(@Url url:String):Response<DetalleResponse>
+
 }
