@@ -19,9 +19,6 @@
             android:name="com.example.smartFix.TelefonoFormsActivity"
             android:exported="false" />
         <activity
-            android:name=".formularioTelefono_Activity"
-            android:exported="false" />
-        <activity
             android:name="com.example.smartFix.FolioTelefonoActivity"
             android:exported="false" />
         <activity
