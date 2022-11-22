@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.SmartFix">
+    package="com.example.smartFix">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -16,16 +16,16 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:targetApi="31">
         <activity
-            android:name=".telefonoForms_Activity"
+            android:name="com.example.smartFix.telefonoForms_Activity"
             android:exported="false" />
         <activity
             android:name=".formularioTelefono_Activity"
             android:exported="false" />
         <activity
-            android:name=".folioTelefono_Activity"
+            android:name="com.example.smartFix.folioTelefono_Activity"
             android:exported="false" />
         <activity
-            android:name=".Login_Activity"
+            android:name="com.example.smartFix.Login_Activity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

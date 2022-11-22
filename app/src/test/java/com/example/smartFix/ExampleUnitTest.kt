@@ -1,4 +1,4 @@
-package com.example.SmartFix
+package com.example.smartFix
 
 import org.junit.Test
 
