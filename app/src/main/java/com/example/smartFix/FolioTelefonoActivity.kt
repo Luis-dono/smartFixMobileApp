@@ -5,16 +5,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 
-class Login_Activity : AppCompatActivity() {
+class FolioTelefonoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
-
+        setContentView(R.layout.activity_folio_telefono)
     }
 
     fun onClick(view: View) {
-        val intent = Intent(this,folioTelefono_Activity::class.java)
+        val intent = Intent(this,TelefonoFormsActivity::class.java)
         startActivity(intent)
     }
-
 }

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fondo_login_degradado"
-    tools:context=".folioTelefono_Activity">
+    tools:context=".FolioTelefonoActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
