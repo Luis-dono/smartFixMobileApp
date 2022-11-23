@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.View.OnClickListener
 import android.widget.EditText
+import android.widget.Toast
 import com.example.smartFix.apiRetrofit.SfApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -17,7 +18,7 @@ class TelefonoFormsActivity : AppCompatActivity(), OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_telefono_forms)
-        searchByFolio("1c798653")
+       
     }
 
     override fun onClick(p0: View?) {
@@ -27,6 +28,7 @@ class TelefonoFormsActivity : AppCompatActivity(), OnClickListener {
               val query2 : String=cajatexto.text.toString()
               searchByFolio(query2)
           }
+          R.id.botonsillo -> Toast.makeText(this, "botonazo", Toast.LENGTH_LONG).show()
       }
     }
     private fun getRetrofit():Retrofit{
@@ -46,7 +48,7 @@ class TelefonoFormsActivity : AppCompatActivity(), OnClickListener {
                     val detalle=detallesRetro?.resultados ?: emptyList()
                     reparaciones.clear()
                     reparaciones.addAll(detalle)
-
+                    println("alaverga si jalo esta madre")
 
                 }else{
                     println("valio verga"
