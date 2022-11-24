@@ -10,6 +10,7 @@ import android.widget.EditText
 
 
 class FolioTelefonoActivity : AppCompatActivity() {
+    var folio:String=""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_folio_telefono)
@@ -18,12 +19,15 @@ class FolioTelefonoActivity : AppCompatActivity() {
 
     fun onClick(view: View) {
         val intent = Intent(this,TelefonoFormsActivity::class.java)
+        getValor()
+        intent.putExtra("folio",folio)
         startActivity(intent)
+        //1c798653
     }
 
-   private fun getValor(view: View){
+   private fun getValor(){
        val editText= findViewById<EditText>(R.id.editTextTextPersonName)
-        val folio=editText.text
+        folio=editText.text.toString()
 
     }
 

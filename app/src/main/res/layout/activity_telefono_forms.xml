@@ -45,11 +45,11 @@
                 android:editable="false"
                 android:enabled="false"
                 android:hint="Marca"
-                app:layout_constraintBottom_toTopOf="@+id/editText"
+                app:layout_constraintBottom_toTopOf="@+id/editTextmarca"
                 tools:layout_editor_absoluteX="0dp" />
 
             <EditText
-                android:id="@+id/editText"
+                android:id="@+id/editTextmarca"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="44dp"

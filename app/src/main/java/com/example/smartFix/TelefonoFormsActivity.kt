@@ -2,6 +2,7 @@ package com.example.smartFix
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.View.OnClickListener
 import android.widget.EditText
@@ -14,19 +15,22 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class TelefonoFormsActivity : AppCompatActivity(), OnClickListener {
-    private val reparaciones= mutableListOf<String>()
+    private val detalle= mutableListOf<String>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_telefono_forms)
-       
+
     }
 
     override fun onClick(p0: View?) {
       when(p0?.id){
           R.id.botonsillo -> {
-              val cajatexto=findViewById<EditText>(R.id.editTextTextPersonName)
-              val query2 : String=cajatexto.text.toString()
-              searchByFolio(query2)
+              val query2 : String? =getIntent().getStringExtra("folio")
+              println("el texto de l caja $query2")
+              if (query2 != null) {
+                  searchByFolio(query2)
+
+              }
           }
           R.id.botonsillo -> Toast.makeText(this, "botonazo", Toast.LENGTH_LONG).show()
       }
@@ -45,18 +49,22 @@ class TelefonoFormsActivity : AppCompatActivity(), OnClickListener {
             runOnUiThread(){
                 if(call.isSuccessful){
                     println(detallesRetro)
-                    val detalle=detallesRetro?.resultados ?: emptyList()
-                    reparaciones.clear()
-                    reparaciones.addAll(detalle)
-                    println("alaverga si jalo esta madre")
+                    val detalleretro=detallesRetro?.resultados ?: emptyList()
+                    this@TelefonoFormsActivity.detalle.clear()
+                    this@TelefonoFormsActivity.detalle.addAll(detalleretro)
+                    print(this@TelefonoFormsActivity.detalle)
+                    Log.d("etiqueta de ejecucion", "no mames si llego aqui")
 
                 }else{
-                    println("valio verga"
-                    )
+                    println("valio verga")
                 }
 
             }
         }
     }
-
+     private fun addInfoForms(){
+         val editText=findViewById<EditText>(R.id.editTextmarca)
+        editText.setText(detalle[1])
+     }
 }
+//1c798653
