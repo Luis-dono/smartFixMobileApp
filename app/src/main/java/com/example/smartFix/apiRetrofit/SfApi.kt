@@ -1,12 +1,12 @@
 package com.example.smartFix.apiRetrofit
 
-import com.example.smartFix.DetalleResponse
+import com.example.smartFix.models.Resultado
 import okhttp3.OkHttpClient
-import retrofit2.Response
+import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
-import retrofit2.http.Url
+import retrofit2.http.Path
 
 interface SfApi {
 
@@ -16,7 +16,7 @@ interface SfApi {
         ).build().create(SfApi::class.java)
     }
 
-    @GET
-    fun getTelefonoByFolio(@Url url:String):Response<DetalleResponse>
+@GET("telefono/detalle/{folio}")
+fun getDetalle(@Path("folio") folio:String): Call<Resultado>
 
 }
