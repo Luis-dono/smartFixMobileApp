@@ -73,7 +73,6 @@
                 android:backgroundTint="@color/green_degrai_medio"
                 android:id="@+id/btnLogin"
                 android:text="Log in"
-                android:onClick="onClick"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/passwordTextField"
                 app:layout_constraintStart_toStartOf="@+id/passwordTextField"

@@ -18,18 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="885dp">
 
-            <EditText
-                android:id="@+id/editTextTextPersonName"
-                android:layout_width="288dp"
-                android:layout_height="55dp"
-                android:layout_marginTop="56dp"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text=""
-                android:hint="Folio"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
 
             <ImageView
                 android:id="@+id/imageView"
@@ -41,17 +30,33 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/telefono_image" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="180dp"
+            <EditText
+                android:id="@+id/txtFolio"
+                android:layout_width="288dp"
                 android:layout_height="55dp"
-                android:layout_marginBottom="412dp"
+                android:layout_marginTop="56dp"
+                android:ems="10"
+                android:hint="Folio"
+                android:inputType="textPersonName"
+                android:text=""
+                android:textColorHint="#212121"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+            <Button
+                android:id="@+id/btnFolio"
+                android:layout_width="248dp"
+                android:layout_height="56dp"
+                android:layout_marginTop="56dp"
+                android:text="Busca"
                 android:background="@drawable/custom_buttom"
-                android:onClick="onClick"
-                android:text="Log in"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName" />
+                app:layout_constraintEnd_toEndOf="@+id/txtFolio"
+                app:layout_constraintHorizontal_bias="0.475"
+                app:layout_constraintStart_toStartOf="@+id/txtFolio"
+                app:layout_constraintTop_toBottomOf="@+id/txtFolio" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>

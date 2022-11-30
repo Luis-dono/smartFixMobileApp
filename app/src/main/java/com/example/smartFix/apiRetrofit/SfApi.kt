@@ -1,9 +1,7 @@
 package com.example.smartFix.apiRetrofit
 
 import com.example.smartFix.DetalleResponse
-import com.example.smartFix.apiRetrofit.models.DataLogin
-import com.example.smartFix.apiRetrofit.models.LoginResponse
-import com.example.smartFix.apiRetrofit.models.Resultado
+import com.example.smartFix.apiRetrofit.models.*
 import okhttp3.OkHttpClient
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -16,18 +14,18 @@ interface SfApi {
 
     companion object{
         val instance = Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:5010")
+            .baseUrl("https://api-smartfixing.auplex.mx")
             .addConverterFactory(GsonConverterFactory.create())
             .client(
             OkHttpClient().newBuilder().build()
             ).build().create(SfApi::class.java)
     }
 
-    @GET
-    fun getTelefonoByFolio(@Url url:String):Response<DetalleResponse>
+    @GET("/telefono/detalle/{folio}")
+    fun getDetalleTelefonoByFolio(@Path("folio")folio:String?):Call<TelefonData>
 
-    @GET("/telefono")
-    fun getTelefonos(): List<Resultado>
+    @PATCH("/telefono/{folio}/estatus")
+    fun asignarTecnico(@Path("folio")folio:String?, @Body params: PatchData):Call<AsignacionTecnicoResponse>
 
     @FormUrlEncoded
     @POST("/login")
@@ -36,4 +34,10 @@ interface SfApi {
         @Field("password") password: String
     ):Call<LoginResponse>
 
+    //b263ae1b
+    /*
+    * "error": false,
+    "folio": "7e1f4bab",
+    "tecnicoid": 6
+    * */
 }
