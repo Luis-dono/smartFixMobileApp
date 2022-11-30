@@ -4,12 +4,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import com.example.smartFix.apiRetrofit.SfApi
 import com.example.smartFix.apiRetrofit.models.AsignacionTecnicoResponse
-import com.example.smartFix.apiRetrofit.models.LoginResponse
+import com.example.smartFix.apiRetrofit.models.Detalle
 import com.example.smartFix.apiRetrofit.models.PatchData
 import com.example.smartFix.apiRetrofit.models.TelefonData
 import retrofit2.Call
@@ -66,15 +65,26 @@ class FolioTelefonoActivity : AppCompatActivity() {
     }
 
     private fun getDetalleTelefono(folio:String){
+
         var call: Call<TelefonData> = SfApi.instance.getDetalleTelefonoByFolio(folio)
         call.enqueue(object: Callback<TelefonData?>{
             override fun onResponse(call: Call<TelefonData?>, response: Response<TelefonData?>) {
                 if (response.isSuccessful){
                     var detalleTelefonoData: TelefonData = response.body()!!
+                    var detalleActual:com.example.smartFix.apiRetrofit.models.Detalle=detalleTelefonoData.resultados.get(0)
+                    envioDatos(detalleActual)
                     Log.d("Garaje","ENTRE AL GET EXITOSAMENTE ${detalleTelefonoData.resultados}")
+                   // Log.d("Garaje","ENTRE AL GET EXITOSAMENTE ${detalleTelefonoData.resultados.get(0).apellido}")
                 }
             }
-
+            fun envioDatos(detalle: Detalle){
+                val intent = Intent(this@FolioTelefonoActivity,TelefonoFormsActivity::class.java)
+                intent.putExtra("marca",detalle.marca)
+                intent.putExtra("modelo",detalle.modelo)
+                intent.putExtra("descripcion",detalle.descripcion_ingreso)
+                intent.putExtra("color",detalle.color)
+                startActivity(intent)
+            }
             override fun onFailure(call: Call<TelefonData?>, t: Throwable) {
                 Log.d("Garaje","${t.toString()}")
             }
