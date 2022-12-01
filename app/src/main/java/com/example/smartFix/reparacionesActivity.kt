@@ -3,6 +3,7 @@ package com.example.smartFix
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.recyclerviewexample.RefaccionProvider
@@ -25,7 +26,7 @@ class reparacionesActivity : AppCompatActivity() {
         binding=ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initRecyclerview()
-        llenarSpinne()
+        obtenerReparaciones()
     }
 
     fun initRecyclerview(){
@@ -33,22 +34,23 @@ class reparacionesActivity : AppCompatActivity() {
         binding.recyclerRefacciones.layoutManager=LinearLayoutManager(this)
         binding.recyclerRefacciones.adapter=Refactionadapter(RefaccionProvider.refaccionlist)
     }
-    fun llenarSpinne(){
+    fun llenarSpinne(listareps:ArrayList<Reparacion>){
         var spinner:Spinner=findViewById(R.id.SPINNER_REPS)
-        val listaRep: ArrayList<Reparacion> = obtenerReparaciones()
-        val sublista : ArrayList<String> = fillArray(listaRep)
+        val sublista : ArrayList<String> = fillArray(listareps)
+        var adapter : ArrayAdapter<String> =  ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,sublista)
+        spinner.adapter = adapter
         println("lista reps"+sublista.toString())
-}
+    }
     fun obtenerReparaciones(): ArrayList<Reparacion> {
         var call: Call<repData> = SfApi.instance.getReparaciones("1")
-            var reparacioneslist: ArrayList<Reparacion> = ArrayList()
+        var reparacioneslist: ArrayList<Reparacion> = ArrayList()
         call.enqueue(object: Callback<repData?>{
             override fun onResponse(call: Call<repData?>, response: Response<repData?>) {
                 if(response.isSuccessful){
                     var reparaciones: repData = response.body()!!
                     reparacioneslist = reparaciones.resultados as ArrayList<Reparacion>
                     println("la puta que te pario"+reparacioneslist.toString())
-
+                    llenarSpinne(reparacioneslist)
                 }
             }
 
@@ -61,12 +63,13 @@ class reparacionesActivity : AppCompatActivity() {
     }
     fun fillArray(lista:ArrayList<Reparacion>): ArrayList<String> {
         var listilla:ArrayList<String> = ArrayList()
+        println("lista entrante "+lista.toString())
         var aux : ArrayList<Reparacion> = lista
-        var contador=0
-        while(contador<aux.size){
-            println("contadr "+contador)
-            listilla.add(aux.get(contador).tipo)
-            contador++
+        var contador:Int= aux.size
+        println("objetos igual a "+contador)
+        for (i in aux){
+            println("si entra el for"+i)
+            listilla.add(i.tipo)
         }
 
         return listilla

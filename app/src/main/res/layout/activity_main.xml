@@ -22,16 +22,17 @@
 
     <Button
         android:id="@+id/Agregar"
-        android:layout_width="70dp"
-        android:layout_height="32dp"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
         android:layout_gravity="bottom"
         android:layout_marginStart="200dp"
         android:text="Agregar" />
+
     <Button
         android:id="@+id/guardar"
-        android:layout_width="70dp"
-        android:layout_height="28dp"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
         android:layout_gravity="bottom"
-        android:layout_marginStart="280dp"
+        android:layout_marginStart="310dp"
         android:text="Guardar" />
 </FrameLayout>
