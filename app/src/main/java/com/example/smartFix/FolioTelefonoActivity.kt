@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import com.example.smartFix.apiRetrofit.SfApi
 import com.example.smartFix.apiRetrofit.models.AsignacionTecnicoResponse
 import com.example.smartFix.apiRetrofit.models.Detalle
@@ -53,6 +54,8 @@ class FolioTelefonoActivity : AppCompatActivity() {
                     if (!dataFolio.error!!){
                         getDetalleTelefono(folio)
                     }
+                }else{
+                    Toast.makeText(applicationContext,"El teléfono ya se encuentra asignado a otro técnico", Toast.LENGTH_LONG).show()
                 }
             }
 
