@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <TextView
+        android:id="@+id/textvMarca"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        app:layout_constraintStart_toEndOf="@+id/Marca"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/Marca"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/textvMarca"
+        android:text="marca"
+        />
+
+    <TextView
+        android:id="@+id/textomodelo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintRight_toLeftOf="@+id/textvModelo"
+
+        app:layout_constraintTop_toBottomOf="@+id/Marca"
+        android:text="modelo" />
+
+    <TextView
+        android:id="@+id/textvModelo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toEndOf="@+id/textomodelo"
+        app:layout_constraintTop_toBottomOf="@+id/textvMarca"
+        tools:text="samsung" />
+
+    <TextView
+        android:id="@+id/REFACCION"
+        android:layout_width="66dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="40dp"
+
+        app:layout_constraintTop_toBottomOf="@+id/Marca"
+        android:text="Refaccion"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/NombreRefacc"
+        android:layout_width="66dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toEndOf="@+id/REFACCION"
+        app:layout_constraintTop_toBottomOf="@+id/textvModelo"
+        tools:text="Refaccion" />
+
+    <TextView
+        android:id="@+id/Precio"
+        android:layout_width="66dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="12dp"
+
+        app:layout_constraintTop_toBottomOf="@+id/REFACCION"
+        android:text="Precio"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/espaciador"
+        android:layout_width="66dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="12dp"
+
+        android:text="_____________________________________________________"
+        app:layout_constraintTop_toBottomOf="@+id/Precio"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="48dp" />
+
+    <TextView
+        android:id="@+id/precio_real"
+        android:layout_width="66dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toEndOf="@+id/Precio"
+        app:layout_constraintTop_toBottomOf="@+id/NombreRefacc"
+        tools:text="1000" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

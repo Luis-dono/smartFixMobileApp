@@ -1,6 +1,7 @@
 package com.example.smartFix.apiRetrofit
 
 
+import com.example.recyclerviewexample.repData
 import com.example.smartFix.apiRetrofit.models.*
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -21,6 +22,8 @@ interface SfApi {
     @GET("/telefono/detalle/{folio}")
     fun getDetalleTelefonoByFolio(@Path("folio")folio:String?):Call<TelefonData>
 
+    @GET("/reparacion/{idrep}")
+    fun getReparaciones(@Path("idrep") id:String):Call<repData>
 
     @PATCH("/telefono/{folio}/estatus")
     fun asignarTecnico(@Path("folio")folio:String?, @Body params: PatchData):Call<AsignacionTecnicoResponse>

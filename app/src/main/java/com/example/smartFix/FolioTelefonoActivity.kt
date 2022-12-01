@@ -51,7 +51,7 @@ class FolioTelefonoActivity : AppCompatActivity() {
                 if (response.isSuccessful){
                     var dataFolio: AsignacionTecnicoResponse = response.body()!!
                     print(dataFolio.tecnicoid)
-                    print(dataFolio.folio)
+                   // print(dAataFolio.folio)
                     Log.d("Garage","DATO ERROR ${dataFolio.error}")
                     if (!dataFolio.error!!){
                         getDetalleTelefono(folio)
