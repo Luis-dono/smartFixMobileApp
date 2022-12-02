@@ -28,6 +28,14 @@ interface SfApi {
     @PATCH("/telefono/{folio}/estatus")
     fun asignarTecnico(@Path("folio")folio:String?, @Body params: PatchData):Call<AsignacionTecnicoResponse>
 
+
+    @FormUrlEncoded
+    @POST("/detalle")
+    fun agregarReparacion(
+        @Field("telefono_folio")telefono_folio:String,
+        @Field("refaccionid")refaccionid:Int,
+        @Field("descripcion_falla")descripcion_falla:String):Call<RepResponse>
+
     @FormUrlEncoded
     @POST("/login")
     fun userLogin(
