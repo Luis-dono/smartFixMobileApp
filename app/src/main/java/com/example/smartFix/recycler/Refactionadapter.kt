@@ -3,8 +3,9 @@ package com.example.recyclerviewexample.afapyer
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.recyclerviewexample.R
-import com.example.recyclerviewexample.refaccion
+
+import com.example.smartFix.R
+import com.example.smartFix.apiRetrofit.models.refaccion
 
 class Refactionadapter(private val RefaccionesList:List<refaccion>) : RecyclerView.Adapter<RefaccionViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RefaccionViewHolder {

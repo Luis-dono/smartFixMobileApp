@@ -13,6 +13,7 @@ class RefaccionViewHolder(view:View):RecyclerView.ViewHolder(view) {
     val modelo=view.findViewById<TextView>(R.id.textvModelo)
     val refaccion=view.findViewById<TextView>(R.id.NombreRefacc)
     val precio=view.findViewById<TextView>(R.id.precio_real)
+
     fun render(refaccionModel: refaccion){
         marca.text=refaccionModel.marca
         modelo.text=refaccionModel.modelo

@@ -1,6 +1,7 @@
 package com.example.smartFix.apiRetrofit
 
 
+import com.example.recyclerviewexample.AsignacionStatusResponse
 import com.example.recyclerviewexample.repData
 import com.example.smartFix.apiRetrofit.models.*
 import okhttp3.OkHttpClient
@@ -18,6 +19,10 @@ interface SfApi {
             .addConverterFactory(GsonConverterFactory.create())
             .client(OkHttpClient().newBuilder().build()).build().create(SfApi::class.java)
     }
+
+    @FormUrlEncoded
+    @PATCH("/telefono/{folio}/estatus")
+    fun asignarStatus(@Path("folio")folio:String?, @Field("estatusid")statusid:Int?,@Field("tecnicoid")tecnicoid:Int?):Call<AsignacionStatusResponse>
 
     @GET("/telefono/detalle/{folio}")
     fun getDetalleTelefonoByFolio(@Path("folio")folio:String?):Call<TelefonData>

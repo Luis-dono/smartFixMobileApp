@@ -8,7 +8,6 @@
 
     <application
         android:allowBackup="true"
-        android:usesCleartextTraffic="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -16,19 +15,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-        tools:targetApi="31"
-
-        >
+        android:usesCleartextTraffic="true"
+        tools:targetApi="31">
         <activity
-            android:name="com.example.smartFix.FolioTelefonoActivity"
+            android:name=".reparacionesActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".FolioTelefonoActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.smartFix.TelefonoFormsActivity"
-            android:exported="false"
-             />
-
+            android:name=".TelefonoFormsActivity"
+            android:exported="false" />
         <activity
-            android:name="com.example.smartFix.LoginActivity"
+            android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

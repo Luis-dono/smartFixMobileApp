@@ -19,10 +19,10 @@ import retrofit2.Response
 lateinit var btnFolio: Button
 
 class FolioTelefonoActivity : AppCompatActivity() {
-    var folio:String=""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_folio_telefono)
+        val bundle: Bundle? = intent.extras
         btnFolio = findViewById(R.id.btnFolio)
         btnFolio.setOnClickListener {
             Log.d("Garaje","Click en el boton buscar")
@@ -84,10 +84,13 @@ class FolioTelefonoActivity : AppCompatActivity() {
             }
             fun envioDatos(detalle: Detalle){
                 val intent = Intent(this@FolioTelefonoActivity,TelefonoFormsActivity::class.java)
+                intent.putExtra("tecnicoid",detalle.tecnicoid)
+                intent.putExtra("folio",folio)
                 intent.putExtra("marca",detalle.marca)
                 intent.putExtra("modelo",detalle.modelo)
                 intent.putExtra("descripcion",detalle.descripcion_ingreso)
                 intent.putExtra("color",detalle.color)
+
                 startActivity(intent)
             }
             override fun onFailure(call: Call<TelefonData?>, t: Throwable) {
