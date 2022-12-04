@@ -1,9 +1,11 @@
-package com.example.recyclerviewexample
+package com.example.smartFix.apiRetrofit.models
 
 import com.example.smartFix.recyclermanejoreparaciones.ReparacionPendiente
 
-data class repData(
+
+class ReparacionDisponibleData(
     val error: Boolean,
+    var folio:String,
     val resultados: List<ReparacionPendiente>,
     val rows: Int
 ) {

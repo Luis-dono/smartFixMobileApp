@@ -86,21 +86,32 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="44dp"
-                android:layout_marginBottom="48dp"
+                android:layout_marginBottom="68dp"
                 android:text="Agregar Reparacion"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/button2"
+                app:layout_constraintHorizontal_bias="0.666"
                 app:layout_constraintStart_toStartOf="@+id/editText4" />
 
             <Button
                 android:id="@+id/button2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="48dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="72dp"
                 android:text="Guardar"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/editText4" />
+
+            <Button
+                android:id="@+id/REPpendientes"
+                android:layout_width="165dp"
+                android:layout_height="45dp"
+                android:layout_marginEnd="108dp"
+                android:layout_marginBottom="20dp"
+                android:text="Reparaciones"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

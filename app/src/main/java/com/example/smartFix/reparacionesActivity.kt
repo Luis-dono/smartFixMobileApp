@@ -1,6 +1,7 @@
 package com.example.smartFix
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -49,6 +50,8 @@ class reparacionesActivity : AppCompatActivity()   {
             }
         }
         folio= bundle?.getString("folio")!!
+
+        intent.putExtra("folio",folio)
         initRecyclerview()
         obtenerReparaciones()
         btnguardar=findViewById(R.id.guardar)

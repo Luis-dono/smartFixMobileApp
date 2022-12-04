@@ -9,17 +9,24 @@ import android.widget.EditText
 
 class TelefonoFormsActivity : AppCompatActivity(){
     lateinit var aggrep:Button
-
+    lateinit var RepPend:Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_telefono_forms)
-
+        RepPend=findViewById(R.id.REPpendientes)
         aggrep=findViewById(R.id.btnagregarreparacion)
         var bundle: Bundle  = intent.extras!!
         llenarcasillas(bundle);
         aggrep.setOnClickListener {
             enviarAReps(bundle)
         }
+        RepPend.setOnClickListener {
+            val intent = Intent(this@TelefonoFormsActivity,manejoreparacionesActivity::class.java)
+            var folioaux: String? =bundle.getString("folio")
+            intent.putExtra("folio",folioaux)
+            startActivity(intent)
+        }
+
     }
     fun enviarAReps(bundle:Bundle){
         val intent = Intent(this@TelefonoFormsActivity,reparacionesActivity::class.java)
