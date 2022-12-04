@@ -22,12 +22,14 @@ class FolioTelefonoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_folio_telefono)
+        val bundle: Bundle? = intent.extras
         btnFolio = findViewById(R.id.btnFolio)
         btnFolio.setOnClickListener {
             Log.d("Garaje","Click en el boton buscar")
             events()
         }
     }
+
 
    private fun events(){
        Log.d("Garaje","Entre a events")
@@ -54,13 +56,13 @@ class FolioTelefonoActivity : AppCompatActivity() {
                     Log.d("Garaje", "tec id $tecid")
                     if (tecid == 0) {
                         folioProceso(folio, tecnicoid,2)
-                        envioDatos(detalleActual)
+                        envioDatos(detalleActual,folio)
                     }else if (tecid != tecnicoid){
                         Toast.makeText(applicationContext,"El teléfono ya se encuentra asignado a otro técnico", Toast.LENGTH_LONG).show()
                         return
                     }
                     Log.d("Garaje", "ENTRE AL GET EXITOSAMENTE ${detalleTelefonoData.resultados}")
-                    envioDatos(detalleActual)
+                    envioDatos(detalleActual,folio)
                 }
             }
 
@@ -70,13 +72,16 @@ class FolioTelefonoActivity : AppCompatActivity() {
         })
     }
 
-    fun envioDatos(detalle: Detalle){
+    fun envioDatos(detalle: Detalle,folio:String){
         val intent = Intent(this@FolioTelefonoActivity,TelefonoFormsActivity::class.java)
+
+        intent.putExtra("tecnicoid",detalle.tecnicoid)
+        intent.putExtra("folio",folio)
         intent.putExtra("marca",detalle.marca)
         intent.putExtra("modelo",detalle.modelo)
+        intent.putExtra("modeloid",detalle.modeloid)
         intent.putExtra("descripcion",detalle.descripcion_ingreso)
         intent.putExtra("color",detalle.color)
-        intent.putExtra("estatus",detalle.estatusid)
         startActivity(intent)
     }
 
@@ -89,7 +94,7 @@ class FolioTelefonoActivity : AppCompatActivity() {
                 if (response.isSuccessful){
                     var dataFolio: AsignacionTecnicoResponse = response.body()!!
                     print(dataFolio.tecnicoid)
-                    print(dataFolio.folio)
+                   // print(dAataFolio.folio)
                     Log.d("Garage","DATO ERROR ${dataFolio.error}")
                 }
             }
@@ -101,9 +106,6 @@ class FolioTelefonoActivity : AppCompatActivity() {
 
         })
     }
-
-
-
 
 }
 

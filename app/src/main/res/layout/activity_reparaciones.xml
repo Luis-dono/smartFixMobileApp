@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".reparacionesActivity">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerRefacciones"
+        android:layout_width="400dp"
+        android:layout_height="622dp" />
+
+    <Spinner
+        android:id="@+id/SPINNER_REPS"
+        android:layout_width="190dp"
+        android:layout_height="75dp"
+        android:layout_gravity="bottom"
+
+        android:contentDescription="@string/app_name" />
+    <EditText
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+
+        />
+    <Button
+        android:id="@+id/Agregar"
+        android:layout_width="98dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="200dp"
+        android:text="Agregar" />
+
+    <Button
+        android:id="@+id/guardar"
+        android:layout_width="98dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="310dp"
+        android:text="Guardar" />
+</FrameLayout>

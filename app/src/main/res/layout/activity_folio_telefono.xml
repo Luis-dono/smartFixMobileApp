@@ -30,6 +30,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/telefono_image" />
 
+
             <EditText
                 android:id="@+id/txtFolio"
                 android:layout_width="288dp"

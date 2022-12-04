@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".reparacionesActivity">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerRefacciones"
+        android:layout_width="400dp"
+        android:layout_height="634dp" />
+
+    <Spinner
+        android:id="@+id/SPINNER_REPS"
+        android:layout_width="190dp"
+        android:layout_height="75dp"
+        android:layout_gravity="bottom"
+
+        android:contentDescription="@string/app_name" />
+
+    <Button
+        android:id="@+id/Agregar"
+        android:layout_width="98dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="200dp"
+        android:text="Agregar" />
+
+    <CheckBox
+        android:id="@+id/checkboxded"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="328dp"
+        android:layout_gravity="bottom"
+
+        android:layout_marginStart="196dp"
+        android:layout_marginBottom="60dp"
+        app:layout_constraintBottom_toTopOf="@+id/SPINNER_REPS"
+        tools:layout_editor_absoluteY="27dp"
+       />
+
+    <Button
+        android:id="@+id/guardar"
+        android:layout_width="98dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="310dp"
+        android:text="Guardar" />
+</FrameLayout>

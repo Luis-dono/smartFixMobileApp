@@ -1,14 +1,15 @@
 package com.example.smartFix.apiRetrofit
 
-import com.example.smartFix.DetalleResponse
+
+import com.example.recyclerviewexample.AsignacionStatusResponse
+import com.example.recyclerviewexample.repData
 import com.example.smartFix.apiRetrofit.models.*
 import okhttp3.OkHttpClient
-import okhttp3.ResponseBody
 import retrofit2.Call
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
+
 
 interface SfApi {
 
@@ -16,16 +17,29 @@ interface SfApi {
         val instance = Retrofit.Builder()
             .baseUrl("https://api-smartfixing.auplex.mx")
             .addConverterFactory(GsonConverterFactory.create())
-            .client(
-            OkHttpClient().newBuilder().build()
-            ).build().create(SfApi::class.java)
+            .client(OkHttpClient().newBuilder().build()).build().create(SfApi::class.java)
     }
+
+    @FormUrlEncoded
+    @PATCH("/telefono/{folio}/estatus")
+    fun asignarStatus(@Path("folio")folio:String?, @Field("estatusid")statusid:Int?,@Field("tecnicoid")tecnicoid:Int?):Call<AsignacionStatusResponse>
 
     @GET("/telefono/detalle/{folio}")
     fun getDetalleTelefonoByFolio(@Path("folio")folio:String?):Call<TelefonData>
 
+    @GET("/reparacion/{idrep}")
+    fun getReparaciones(@Path("idrep") id:String):Call<repData>
+
     @PATCH("/telefono/{folio}/estatus")
     fun asignarTecnico(@Path("folio")folio:String?, @Body params: PatchData):Call<AsignacionTecnicoResponse>
+
+
+    @FormUrlEncoded
+    @POST("/detalle")
+    fun agregarReparacion(
+        @Field("telefono_folio")telefono_folio:String,
+        @Field("refaccionid")refaccionid:Int,
+        @Field("descripcion_falla")descripcion_falla:String):Call<RepResponse>
 
     @FormUrlEncoded
     @POST("/login")
