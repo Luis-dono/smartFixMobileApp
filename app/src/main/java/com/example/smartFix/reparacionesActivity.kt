@@ -1,9 +1,11 @@
 package com.example.smartFix
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
@@ -28,7 +30,7 @@ class reparacionesActivity : AppCompatActivity()   {
     private var folio:String=""
     lateinit var btnagregar: Button
     lateinit var btnguardar:Button
-
+    var estatusid: Int = 0
     var reparacionesFlagna :Boolean=false
     var sublista : ArrayList<String> = ArrayList()
     private var repdispo:ArrayList<Reparacion> = ArrayList()
@@ -59,9 +61,19 @@ class reparacionesActivity : AppCompatActivity()   {
         }
         btnguardar.setOnClickListener {
             cambiarstatus(bundle)
+            val intent = Intent()
+            intent?.putExtra("estatusid",estatusid)
+            setResult(RESULT_OK,intent)
         }
 
 
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        if(keyCode==KeyEvent.KEYCODE_BACK){
+            finish()
+        }
+        return super.onKeyDown(keyCode, event)
     }
 
     private fun initRecyclerview(){
@@ -149,7 +161,7 @@ class reparacionesActivity : AppCompatActivity()   {
         if(!reparacionesFlagna){
             status=3
         }
-
+        estatusid = status
         val tecnicoid: Int? = bundle?.getInt("tecnicoid")
         val data= Patchstatus(status,tecnicoid)
         val cal:Call<AsignacionStatusResponse> =SfApi.instance.asignarStatus(folio,data.estatusid,data.tecnicoid)
@@ -164,17 +176,12 @@ class reparacionesActivity : AppCompatActivity()   {
                     if (!dataresp.error!!){
 
                     }
-
-
                 }
-
             }
 
             override fun onFailure(call: Call<AsignacionStatusResponse>, t: Throwable) {
                 println("no jalo")
             }
-
-
         })
     }
 

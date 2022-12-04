@@ -77,6 +77,7 @@ class FolioTelefonoActivity : AppCompatActivity() {
 
         intent.putExtra("tecnicoid",detalle.tecnicoid)
         intent.putExtra("folio",folio)
+        intent.putExtra("estatusid",detalle.estatusid)
         intent.putExtra("marca",detalle.marca)
         intent.putExtra("modelo",detalle.modelo)
         intent.putExtra("modeloid",detalle.modeloid)
