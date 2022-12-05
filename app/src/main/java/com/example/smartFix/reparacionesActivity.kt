@@ -1,28 +1,27 @@
 package com.example.smartFix
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
-import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.Spinner
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.recyclerviewexample.*
-import com.example.recyclerviewexample.afapyer.Refactionadapter
-
+import com.example.smartFix.recycler.Refactionadapter
 import com.example.smartFix.apiRetrofit.SfApi
 import com.example.smartFix.apiRetrofit.models.RepResponse
+import com.example.smartFix.apiRetrofit.models.Reparacion
 import com.example.smartFix.apiRetrofit.models.refaccion
 import com.example.smartFix.databinding.ActivityAgregarReparacionesBinding
+import com.example.smartFix.recycler.RefaccionProvider
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import kotlin.properties.Delegates
+
 
 class reparacionesActivity : AppCompatActivity()   {
     private lateinit var binding: ActivityAgregarReparacionesBinding
@@ -79,7 +78,7 @@ class reparacionesActivity : AppCompatActivity()   {
     private fun initRecyclerview(){
 
         binding.recyclerRefacciones.layoutManager=LinearLayoutManager(this)
-        binding.recyclerRefacciones.adapter=Refactionadapter(RefaccionProvider.refaccionlist)
+        binding.recyclerRefacciones.adapter= Refactionadapter(RefaccionProvider.refaccionlist)
     }
     private fun llenarSpinne(listareps:ArrayList<Reparacion>){
         var spinner:Spinner=findViewById(R.id.SPINNER_REPS)

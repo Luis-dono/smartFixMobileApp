@@ -51,14 +51,13 @@ class FolioTelefonoActivity : AppCompatActivity() {
                     Log.d("Garaje", "RESPONSE SUCCESFULL")
                     var detalleTelefonoData: TelefonData = response.body()!!
                     var detalleActual: com.example.smartFix.apiRetrofit.models.Detalle = detalleTelefonoData.resultados.get(0)
-                    val tecid: Int?
-                    tecid = detalleActual.tecnicoid
-                    Log.d("Garaje", "tec id $tecid")
-                    if (tecid == 0) {
+                    Log.d("Garaje", "tec id ${detalleActual.tecnicoid}")
+                    if (detalleActual.tecnicoid == 0) {
+                        Log.d("Garaje", "ENTRE ALV ")
                         folioProceso(folio, tecnicoid,2)
                         envioDatos(detalleActual,folio)
-                    }else if (tecid != tecnicoid){
-                        Toast.makeText(applicationContext,"El teléfono ya se encuentra asignado a otro técnico", Toast.LENGTH_LONG).show()
+                    }else if (detalleActual.tecnicoid != tecnicoid){
+                        Toast.makeText(applicationContext,"El teléfono ya se encuentra asignado a otro técnico con id ${detalleActual.tecnicoid}", Toast.LENGTH_LONG).show()
                         return
                     }
                     Log.d("Garaje", "ENTRE AL GET EXITOSAMENTE ${detalleTelefonoData.resultados}")
@@ -109,7 +108,6 @@ class FolioTelefonoActivity : AppCompatActivity() {
     }
 
 }
-
 
 
 

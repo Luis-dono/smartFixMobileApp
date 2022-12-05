@@ -35,8 +35,11 @@ class TelefonoFormsActivity : AppCompatActivity(){
         tvProgress = findViewById(R.id.tvProgreso)
         var bundle: Bundle  = intent.extras!!
         val estatusid = bundle?.getInt("estatusid")
-        if(estatusid== 3){
+        if(estatusid== 4){
             btnverReparaciones.isEnabled = true
+        }
+        if(estatusid==3){
+            aggrep.isEnabled=false
         }
         cambiarProgressBar(estatusid)
         llenarcasillas(bundle);
