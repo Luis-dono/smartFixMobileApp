@@ -1,4 +1,4 @@
-package com.example.recyclerviewexample.afapyer
+package com.example.smartFix.recycleraggreparacion
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

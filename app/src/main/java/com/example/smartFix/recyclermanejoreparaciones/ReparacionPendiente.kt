@@ -8,5 +8,4 @@ data class ReparacionPendiente (
     val descripcion_falla:String,
     val estatus_reparacion:String,
     val aprobada:Int
-    ){
-}
+    )

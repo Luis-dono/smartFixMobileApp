@@ -1,5 +1,6 @@
 package com.example.smartFix.recyclermanejoreparaciones
 import android.content.Context
+import android.os.Bundle
 import android.util.Log
 import android.view.Display.Mode
 import android.view.LayoutInflater
@@ -12,16 +13,24 @@ import androidx.appcompat.view.menu.ActionMenuItemView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.smartFix.R
+import com.example.smartFix.apiRetrofit.SfApi
+import com.example.smartFix.apiRetrofit.models.CambioStatusReparacionResponse
+import com.example.smartFix.apiRetrofit.models.PatchDataReparacion
 import com.example.smartFix.manejoreparacionesActivity
 import kotlinx.android.synthetic.main.item_reparacion.view.*
-class MyAdapter (context: manejoreparacionesActivity, arraylist:ArrayList<ModelClass>) : RecyclerView.Adapter<MyAdapter.ViewHolder>(){
-    //private val modellistener:ModelClassListener
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import android.content.Intent
+class MyAdapter (context: manejoreparacionesActivity, arraylist:ArrayList<ModelClass>,folio:String) : RecyclerView.Adapter<MyAdapter.ViewHolder>(){
+
+    private val folio:String
     private val context2:Context
     private lateinit var view:View
      val arrayList: ArrayList<ModelClass>
     val arrayListaux:ArrayList<ModelClass>
     init {
-      //  this.modellistener=modellistener
+      this.folio=folio
         this.arrayList=arraylist
         this.context2=context
         this.arrayListaux=arraylist
@@ -40,11 +49,19 @@ class MyAdapter (context: manejoreparacionesActivity, arraylist:ArrayList<ModelC
         val modelClass=arrayListaux[position]
         holder.itemView.status.text=modelClass.status
         holder.itemView.Tiporeparacion.text=modelClass.tiporefaccion
+        holder.itemView.IDrep.text= modelClass.id.toString()
         holder.itemView.checkboxstatusrep.isChecked=modelClass.isSelected
-        if(holder.itemView.checkboxstatusrep.isChecked){
-            arrayListaux[position].isSelected=true
+       holder.itemView.checkboxstatusrep.setOnClickListener {
+           if(holder.itemView.checkboxstatusrep.isChecked&&!modelClass.isSelected){
+               arrayListaux[position].isSelected=true
+               println("id entrante "+arrayListaux.get(position).id)
+               actualizarStatusReoaracion(arrayList[position])
+               holder.itemView.checkboxstatusrep.isEnabled=false
+               holder.itemView.status.text="Listo"
+           }
+       }
 
-        }
+
 
 
     }
@@ -64,6 +81,28 @@ class MyAdapter (context: manejoreparacionesActivity, arraylist:ArrayList<ModelC
 
             }
         }
+    }
+    fun actualizarStatusReoaracion(modelselected:ModelClass){
+        val data= PatchDataReparacion(folio,5)
+        println(modelselected.id)
+        var call: Call<CambioStatusReparacionResponse> = SfApi.instance.actualizarStatusReparacion(modelselected.id,data.folio,data.estatusid)
+        call.enqueue(object: Callback<CambioStatusReparacionResponse?> {
+            override fun onResponse(
+                call: Call<CambioStatusReparacionResponse?>,
+                response: Response<CambioStatusReparacionResponse?>
+            ) {
+                if(response.isSuccessful){
+                    var respuesta: CambioStatusReparacionResponse? =response.body()
+                    println("resouesta"+ respuesta.toString())
+                }
+            }
+
+            override fun onFailure(call: Call<CambioStatusReparacionResponse?>, t: Throwable) {
+                println("fallo rotundamente")
+            }
+
+        })
+
     }
 }
 

@@ -1,5 +1,6 @@
 package com.example.smartFix
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -25,7 +26,7 @@ class manejoreparacionesActivity : AppCompatActivity() {
     private var repracionesaux:ArrayList<ModelClass> = ArrayList()
     private var data : ArrayList<ReparacionPendiente> = ArrayList()
     private lateinit var btnGuardar:Button
-    private lateinit var  myAdapter:MyAdapter
+    private lateinit var  myAdapteraux:MyAdapter
    // private lateinit var myadapteraux:MyAdapter
 
 
@@ -49,33 +50,25 @@ class manejoreparacionesActivity : AppCompatActivity() {
         var reparacionesterminadas:ArrayList<ModelClass>
         var reparacioneslistas:ArrayList<ModelClass>
         reparacioneslistas=repracionesaux
-
-        println("informacion de aprobados "+reparacioneslistas.get(0).tiporefaccion)
-        for (i in reparacioneslistas){
-            println(i.toString())
-            if(i.isSelected==true){
-                actualizarStatusReoaracion(i)
-            }
-        }
     }
 
     private fun event(){
 
-        println("data es "+ data.toString())
+            println("data es "+ data.toString())
 
-        println("datos despues de obtenerlos "+reparacionesRestantes.toString())
-          myAdapter = MyAdapter(this,reparacionesRestantes)
-        //this.myadapteraux=myAdapter
-        repracionesaux=myAdapter.arrayListaux
-        RecyclerViewReps.layoutManager=LinearLayoutManager(this)
-        RecyclerViewReps.itemAnimator=DefaultItemAnimator()
-        RecyclerViewReps.addItemDecoration(
-            DividerItemDecoration(
-                this,
-                LinearLayoutManager.VERTICAL
+            println("datos despues de obtenerlos "+reparacionesRestantes.toString())
+            var myAdapter = MyAdapter(this,reparacionesRestantes,folio)
+
+            repracionesaux=myAdapter.arrayListaux
+            RecyclerViewReps.layoutManager=LinearLayoutManager(this)
+            RecyclerViewReps.itemAnimator=DefaultItemAnimator()
+            RecyclerViewReps.addItemDecoration(
+                DividerItemDecoration(
+                    this,
+                    LinearLayoutManager.VERTICAL
+                )
             )
-        )
-        RecyclerViewReps.adapter=myAdapter
+            RecyclerViewReps.adapter=myAdapter
     }
     private fun obtenerreparaciones():ArrayList<ReparacionPendiente>{
             println("entro al metodo")
@@ -131,27 +124,9 @@ class manejoreparacionesActivity : AppCompatActivity() {
 
 
     }
-    fun actualizarStatusReoaracion(modelselected:ModelClass){
-            val data= PatchDataReparacion(folio,5)
-            println(modelselected.id)
-            var call: Call<CambioStatusReparacionResponse> = SfApi.instance.actualizarStatusReparacion(modelselected.id,data.folio,data.estatusid)
-            call.enqueue(object: Callback<CambioStatusReparacionResponse?>{
-                override fun onResponse(
-                    call: Call<CambioStatusReparacionResponse?>,
-                    response: Response<CambioStatusReparacionResponse?>
-                ) {
-                    if(response.isSuccessful){
-                        var respuesta: CambioStatusReparacionResponse? =response.body()
-                        println("resouesta"+ respuesta.toString())
-                   }
-                }
 
-                override fun onFailure(call: Call<CambioStatusReparacionResponse?>, t: Throwable) {
-                        println("fallo rotundamente")
-                }
 
-            })
+
 
     }
 
-}

@@ -1,6 +1,5 @@
 package com.example.smartFix
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,17 +10,17 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.Spinner
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.recyclerviewexample.*
-import com.example.recyclerviewexample.afapyer.Refactionadapter
-
+import com.example.smartFix.recycleraggreparacion.Refactionadapter
 import com.example.smartFix.apiRetrofit.SfApi
 import com.example.smartFix.apiRetrofit.models.RepResponse
 import com.example.smartFix.apiRetrofit.models.refaccion
+import com.example.smartFix.apiRetrofit.models.repData
 import com.example.smartFix.databinding.ActivityAgregarReparacionesBinding
+import com.example.smartFix.recycleraggreparacion.RefaccionProvider
+import com.example.smartFix.recycleraggreparacion.Reparacion
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import kotlin.properties.Delegates
 
 class reparacionesActivity : AppCompatActivity()   {
     private lateinit var binding: ActivityAgregarReparacionesBinding
@@ -78,9 +77,9 @@ class reparacionesActivity : AppCompatActivity()   {
         spinner.adapter = adapter
         println("lista reps"+sublista.toString())
     }
-    private fun obtenerReparaciones(): ArrayList<Reparacion> {
+    private fun obtenerReparaciones() {
         var call: Call<repData> = SfApi.instance.getReparaciones("1")
-        var reparacioneslist: ArrayList<Reparacion> = ArrayList()
+        var reparacioneslist: ArrayList<Reparacion>
         call.enqueue(object: Callback<repData?>{
             override fun onResponse(call: Call<repData?>, response: Response<repData?>) {
                 if(response.isSuccessful){
@@ -97,7 +96,7 @@ class reparacionesActivity : AppCompatActivity()   {
             }
 
         })
-        return reparacioneslist
+
     }
     private fun fillArray(lista:ArrayList<Reparacion>): ArrayList<String> {
         var listilla:ArrayList<String> = ArrayList()
@@ -105,7 +104,7 @@ class reparacionesActivity : AppCompatActivity()   {
         var contador:Int= aux.size
 
         for (i in aux){
-            println("si entra el for"+i)
+            println("si entra el for"+i.tipo)
             listilla.add(i.tipo)
         }
 

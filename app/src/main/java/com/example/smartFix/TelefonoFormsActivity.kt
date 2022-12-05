@@ -22,6 +22,7 @@ class TelefonoFormsActivity : AppCompatActivity(){
         }
         RepPend.setOnClickListener {
             val intent = Intent(this@TelefonoFormsActivity,manejoreparacionesActivity::class.java)
+
             var folioaux: String? =bundle.getString("folio")
             intent.putExtra("folio",folioaux)
             startActivity(intent)

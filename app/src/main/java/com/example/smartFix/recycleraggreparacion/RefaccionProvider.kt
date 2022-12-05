@@ -1,4 +1,4 @@
-package com.example.recyclerviewexample
+package com.example.smartFix.recycleraggreparacion
 
 import com.example.smartFix.apiRetrofit.models.refaccion
 

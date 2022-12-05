@@ -1,8 +1,8 @@
 package com.example.smartFix.apiRetrofit
 
 
-import com.example.recyclerviewexample.AsignacionStatusResponse
-import com.example.recyclerviewexample.repData
+import com.example.smartFix.AsignacionStatusResponse
+import com.example.smartFix.apiRetrofit.models.repData
 import com.example.smartFix.apiRetrofit.models.*
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -41,6 +41,7 @@ interface SfApi {
 
      @GET("/detalle/reparaciones/{folio}?rolid=2")
          fun obtenerRepaConfirmadas(@Path("folio")folio:String?):Call<ReparacionDisponibleData>
+
     @FormUrlEncoded
     @POST("/detalle")
     fun agregarReparacion(

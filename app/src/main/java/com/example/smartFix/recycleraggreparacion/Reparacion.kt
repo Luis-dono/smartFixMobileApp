@@ -1,4 +1,4 @@
-package com.example.recyclerviewexample
+package com.example.smartFix.recycleraggreparacion
 
 data class Reparacion (
     val refaccionid: Int,
