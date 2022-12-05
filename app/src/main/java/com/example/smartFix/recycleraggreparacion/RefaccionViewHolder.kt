@@ -1,4 +1,5 @@
-package com.example.smartFix.recycler
+package com.example.smartFix.recycleraggreparacion
+
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView

@@ -1,4 +1,4 @@
-package com.example.recyclerviewexample
+package com.example.smartFix
 
-class Patchstatus (val estatusid:Int?,val tecnicoid:Int?){
+data class Patchstatus (val estatusid:Int?,val tecnicoid:Int?){
 }

@@ -1,4 +1,4 @@
-package com.example.smartFix.apiRetrofit.models
+package com.example.smartFix.recycleraggreparacion
 
 data class Reparacion (
     val refaccionid: Int,
@@ -9,5 +9,4 @@ data class Reparacion (
     val marca:String,
     val modeloid:Int,
     val modelo:String
-){
-}
+)

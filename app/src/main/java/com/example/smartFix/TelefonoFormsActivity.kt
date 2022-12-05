@@ -12,7 +12,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 
 
 class TelefonoFormsActivity : AppCompatActivity(){
-    lateinit var aggrep:Button
+    lateinit var btnAggrep:Button
+
     lateinit var btnverReparaciones: Button
     lateinit var progBar: ProgressBar
     lateinit var tvProgress:TextView
@@ -31,21 +32,28 @@ class TelefonoFormsActivity : AppCompatActivity(){
         progBar = findViewById(R.id.progressBar)
         progBar.max = 5
         btnverReparaciones=findViewById(R.id.btnVerReparaciones)
-        aggrep=findViewById(R.id.btnagregarreparacion)
+        btnAggrep=findViewById(R.id.btnagregarreparacion)
         tvProgress = findViewById(R.id.tvProgreso)
         var bundle: Bundle  = intent.extras!!
         val estatusid = bundle?.getInt("estatusid")
-        if(estatusid== 4){
+       //if(estatusid== 4){
             btnverReparaciones.isEnabled = true
-        }
-        if(estatusid==3){
-            aggrep.isEnabled=false
+        //}
+        if(estatusid>=3){
+            btnAggrep.isEnabled=false
         }
         cambiarProgressBar(estatusid)
         llenarcasillas(bundle);
-        aggrep.setOnClickListener {
+        btnAggrep.setOnClickListener {
             enviarAReps(bundle)
         }
+        btnverReparaciones.setOnClickListener {
+            val intent = Intent(this@TelefonoFormsActivity,manejoreparacionesActivity::class.java)
+            var folioaux: String? =bundle.getString("folio")
+            intent.putExtra("folio",folioaux)
+            startActivity(intent)
+        }
+
     }
 
     fun enviarAReps(bundle:Bundle){
@@ -89,5 +97,3 @@ class TelefonoFormsActivity : AppCompatActivity(){
 
     }
 }
-//1c798653
-//e798e01f

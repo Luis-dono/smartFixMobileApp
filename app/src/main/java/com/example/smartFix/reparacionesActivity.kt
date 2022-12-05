@@ -10,14 +10,14 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.Spinner
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.recyclerviewexample.*
-import com.example.smartFix.recycler.Refactionadapter
+import com.example.smartFix.recycleraggreparacion.Refactionadapter
 import com.example.smartFix.apiRetrofit.SfApi
 import com.example.smartFix.apiRetrofit.models.RepResponse
-import com.example.smartFix.apiRetrofit.models.Reparacion
 import com.example.smartFix.apiRetrofit.models.refaccion
+import com.example.smartFix.apiRetrofit.models.repData
 import com.example.smartFix.databinding.ActivityAgregarReparacionesBinding
-import com.example.smartFix.recycler.RefaccionProvider
+import com.example.smartFix.recycleraggreparacion.RefaccionProvider
+import com.example.smartFix.recycleraggreparacion.Reparacion
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -34,11 +34,8 @@ class reparacionesActivity : AppCompatActivity()   {
     var sublista : ArrayList<String> = ArrayList()
     private var repdispo:ArrayList<Reparacion> = ArrayList()
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // SuperHeroProvider.SuperHero1
         setContentView(R.layout.activity_agregar_reparaciones)
         var bundle: Bundle  = intent.extras!!
         binding=ActivityAgregarReparacionesBinding.inflate(layoutInflater)
@@ -65,7 +62,6 @@ class reparacionesActivity : AppCompatActivity()   {
             setResult(RESULT_OK,intent)
         }
 
-
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
@@ -80,6 +76,7 @@ class reparacionesActivity : AppCompatActivity()   {
         binding.recyclerRefacciones.layoutManager=LinearLayoutManager(this)
         binding.recyclerRefacciones.adapter= Refactionadapter(RefaccionProvider.refaccionlist)
     }
+
     private fun llenarSpinne(listareps:ArrayList<Reparacion>){
         var spinner:Spinner=findViewById(R.id.SPINNER_REPS)
         sublista = fillArray(listareps)
@@ -87,7 +84,8 @@ class reparacionesActivity : AppCompatActivity()   {
         spinner.adapter = adapter
         println("lista reps"+sublista.toString())
     }
-    private fun obtenerReparaciones(modeloid:Int): ArrayList<Reparacion> {
+
+    private fun obtenerReparaciones(modeloid:Int) {
         var call: Call<repData> = SfApi.instance.getReparaciones("$modeloid")
         var reparacioneslist: ArrayList<Reparacion> = ArrayList()
         call.enqueue(object: Callback<repData?>{
@@ -105,8 +103,9 @@ class reparacionesActivity : AppCompatActivity()   {
             }
 
         })
-        return reparacioneslist
+
     }
+
     private fun fillArray(lista:ArrayList<Reparacion>): ArrayList<String> {
         var listilla:ArrayList<String> = ArrayList()
         var aux : ArrayList<Reparacion> = lista
@@ -115,12 +114,9 @@ class reparacionesActivity : AppCompatActivity()   {
         for (i in aux){
             listilla.add(i.tipo)
         }
-
         return listilla
     }
     private fun mandarreparaciones(refaccionid:Int,descripcion:String){
-
-        // var datosaux:RepResponse = RepResponse(folio,1,"pantalla rota")
         var call : Call<RepResponse> = SfApi.instance.agregarReparacion(folio,refaccionid,descripcion)
         call.enqueue(object : Callback<RepResponse> {
             override fun onResponse(call: Call<RepResponse>, response: Response<RepResponse>) {

@@ -1,4 +1,4 @@
-package com.example.recyclerviewexample
+package com.example.smartFix
 
 data class AsignacionStatusResponse(
                                 val error:Boolean?,
