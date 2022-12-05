@@ -22,7 +22,7 @@
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/Idrefaccion"
+        android:id="@+id/status"
         android:layout_width="131dp"
         android:layout_height="30dp"
 

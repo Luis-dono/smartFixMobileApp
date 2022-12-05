@@ -1,7 +1,5 @@
 package com.example.smartFix
 
-import android.graphics.ColorSpace.Model
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -9,12 +7,12 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import kotlinx.android.synthetic.main.activity_manejoreparaciones.*
-import com.example.recyclerviewexample.repData
 import com.example.smartFix.apiRetrofit.SfApi
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.example.smartFix.apiRetrofit.models.CambioStatusReparacionResponse
+import com.example.smartFix.apiRetrofit.models.PatchDataReparacion
 import com.example.smartFix.apiRetrofit.models.ReparacionDisponibleData
 import com.example.smartFix.recyclermanejoreparaciones.ModelClass
 import com.example.smartFix.recyclermanejoreparaciones.MyAdapter
@@ -27,7 +25,10 @@ class manejoreparacionesActivity : AppCompatActivity() {
     private var repracionesaux:ArrayList<ModelClass> = ArrayList()
     private var data : ArrayList<ReparacionPendiente> = ArrayList()
     private lateinit var btnGuardar:Button
-    var myAdapter = MyAdapter(this,reparacionesRestantes)
+    private lateinit var  myAdapter:MyAdapter
+   // private lateinit var myadapteraux:MyAdapter
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,16 +39,34 @@ class manejoreparacionesActivity : AppCompatActivity() {
         obtenerreparaciones()
         btnGuardar=findViewById(R.id.guardarreparaciones)
         btnGuardar.setOnClickListener{
-                myAdapter.
+                guardarYasignarStatus()
         }
       //  event()
     }
+
+    private fun guardarYasignarStatus() {
+        println("data al fuardar "+data.toString())
+        var reparacionesterminadas:ArrayList<ModelClass>
+        var reparacioneslistas:ArrayList<ModelClass>
+        reparacioneslistas=repracionesaux
+
+        println("informacion de aprobados "+reparacioneslistas.get(0).tiporefaccion)
+        for (i in reparacioneslistas){
+            println(i.toString())
+            if(i.isSelected==true){
+                actualizarStatusReoaracion(i)
+            }
+        }
+    }
+
     private fun event(){
 
         println("data es "+ data.toString())
 
         println("datos despues de obtenerlos "+reparacionesRestantes.toString())
-           myAdapter = MyAdapter(this,reparacionesRestantes)
+          myAdapter = MyAdapter(this,reparacionesRestantes)
+        //this.myadapteraux=myAdapter
+        repracionesaux=myAdapter.arrayListaux
         RecyclerViewReps.layoutManager=LinearLayoutManager(this)
         RecyclerViewReps.itemAnimator=DefaultItemAnimator()
         RecyclerViewReps.addItemDecoration(
@@ -96,15 +115,43 @@ class manejoreparacionesActivity : AppCompatActivity() {
 
         for (i in data){
             var stri:String=i.tipo
-            var status:Int=i.detalle_reparacionid
+            var status:String=i.estatus_reparacion
+            var aprove:Int=i.aprobada
+            var idrep:Int=i.detalle_reparacionid
             println("tipo actual "+stri)
             println("id reparaciojn "+status)
+            println("aprobada "+aprove)
 
-            this.reparacionesRestantes.add(ModelClass(stri,status,false))
+            if(aprove!=1)continue
+            this.reparacionesRestantes.add(ModelClass(stri, status,idrep, false))
+
 
             println("agregar "+reparacionesRestantes.get(0).tiporefaccion)
         }
-        println("agarrar datos de data es "+reparacionesRestantes.get(12).tiporefaccion)
+
 
     }
+    fun actualizarStatusReoaracion(modelselected:ModelClass){
+            val data= PatchDataReparacion(folio,5)
+            println(modelselected.id)
+            var call: Call<CambioStatusReparacionResponse> = SfApi.instance.actualizarStatusReparacion(modelselected.id,data.folio,data.estatusid)
+            call.enqueue(object: Callback<CambioStatusReparacionResponse?>{
+                override fun onResponse(
+                    call: Call<CambioStatusReparacionResponse?>,
+                    response: Response<CambioStatusReparacionResponse?>
+                ) {
+                    if(response.isSuccessful){
+                        var respuesta: CambioStatusReparacionResponse? =response.body()
+                        println("resouesta"+ respuesta.toString())
+                   }
+                }
+
+                override fun onFailure(call: Call<CambioStatusReparacionResponse?>, t: Throwable) {
+                        println("fallo rotundamente")
+                }
+
+            })
+
+    }
+
 }

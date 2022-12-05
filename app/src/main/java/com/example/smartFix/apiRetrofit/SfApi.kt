@@ -33,6 +33,12 @@ interface SfApi {
     @PATCH("/telefono/{folio}/estatus")
     fun asignarTecnico(@Path("folio")folio:String?, @Body params: PatchData):Call<AsignacionTecnicoResponse>
 
+    @FormUrlEncoded
+    @PATCH("/detalle/{refaccionid}/estatus")
+    fun actualizarStatusReparacion(@Path ("refaccionid") refaccionid: Int,
+                                   @Field("telefono_folio") folio:String?, @Field("estatusid") status: Int?
+    ):Call<CambioStatusReparacionResponse>
+
      @GET("/detalle/reparaciones/{folio}?rolid=2")
          fun obtenerRepaConfirmadas(@Path("folio")folio:String?):Call<ReparacionDisponibleData>
     @FormUrlEncoded
