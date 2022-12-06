@@ -44,7 +44,7 @@ class MyAdapter (context: manejoreparacionesActivity, arraylist:ArrayList<ModelC
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val modelClass=arrayListaux[position]
+        var modelClass=arrayListaux[position]
         if(modelClass.status.equals("Listo")){
             holder.itemView.checkboxstatusrep.isEnabled=false
         }
@@ -59,9 +59,15 @@ class MyAdapter (context: manejoreparacionesActivity, arraylist:ArrayList<ModelC
                actualizarStatusReoaracion(arrayList[position])
                holder.itemView.checkboxstatusrep.isEnabled=false
                holder.itemView.status.text="Listo"
+               modelClass.status="Listo"
+               arrayListaux[position]=modelClass
            }
        }
 
+    }
+
+    fun getArraylist():ArrayList<ModelClass>{
+        return arrayListaux
     }
 
     override fun getItemCount(): Int {

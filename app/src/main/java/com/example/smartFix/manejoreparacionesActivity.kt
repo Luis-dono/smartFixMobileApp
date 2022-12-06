@@ -26,7 +26,7 @@ class manejoreparacionesActivity : AppCompatActivity() {
     private var repracionesaux:ArrayList<ModelClass> = ArrayList()
     private var data : ArrayList<ReparacionPendiente> = ArrayList()
     private lateinit var btnGuardar:Button
-    private lateinit var  myAdapteraux:MyAdapter
+    private lateinit var  myAdapter:MyAdapter
     private var flagReparacionesListas:Boolean = false
     // private lateinit var myadapteraux:MyAdapter
 
@@ -42,7 +42,6 @@ class manejoreparacionesActivity : AppCompatActivity() {
         obtenerreparaciones()
         btnGuardar=findViewById(R.id.guardarreparaciones)
         btnGuardar.setOnClickListener{
-            obtenerreparaciones()
             verificarReparacionesListas()
             if(flagReparacionesListas){
                 cambiarEstatus(folio,tecnicoid!!,5)
@@ -68,7 +67,7 @@ class manejoreparacionesActivity : AppCompatActivity() {
             println("data es "+ data.toString())
 
             println("datos despues de obtenerlos "+reparacionesRestantes.toString())
-            var myAdapter = MyAdapter(this,reparacionesRestantes,folio)
+            myAdapter = MyAdapter(this,reparacionesRestantes,folio)
 
             repracionesaux=myAdapter.arrayListaux
             RecyclerViewReps.layoutManager=LinearLayoutManager(this)
@@ -124,7 +123,7 @@ class manejoreparacionesActivity : AppCompatActivity() {
             println("aprobada "+aprove)
 
             if(aprove!=1)continue
-            this.reparacionesRestantes.add(ModelClass(stri, status,idrep, false))
+            this.reparacionesRestantes.add(ModelClass(stri, status,idrep, aprove,false))
 
             println("agregar "+reparacionesRestantes.get(0).tiporefaccion)
         }
@@ -132,15 +131,17 @@ class manejoreparacionesActivity : AppCompatActivity() {
     }
 
     private fun verificarReparacionesListas(){
+        val data2 = myAdapter.getArraylist()
         var contRepAprobado:Int = 0
         var contRepListas:Int = 0
 
-        for (i in data){
-            var status:String=i.estatus_reparacion
-            var aprove:Int=i.aprobada
+        for (i in data2){
+            var status:String=i.status
+            var aprove:Int=i.aprobado
             if(aprove!=1)continue
             contRepAprobado++
             if (status.equals("Listo"))contRepListas++
+            Log.d("Garage","status: $status aprobado: $aprove")
         }
         if (contRepAprobado == contRepListas){
             flagReparacionesListas=true;
