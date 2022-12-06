@@ -44,7 +44,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-
     fun loginProceso(correo:String, password:String ){
         var call: Call<LoginResponse> = SfApi.instance.userLogin(correo,password)
 
@@ -74,25 +73,6 @@ class LoginActivity : AppCompatActivity() {
 
         })
 
-
-       /*SfApi.instance.userLogin(correo,password).enqueue(object: Callback<LoginResponse>{
-            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                println("ENTRE PUTAS SI")
-                print(response)
-                println("ENTRE PUTAS")
-                if (response.isSuccessful){
-                    val intent = Intent(this@LoginActivity,FolioTelefonoActivity::class.java)
-                    startActivity(intent)
-                }
-            }
-
-            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                val mensaje = t.message
-                println(mensaje)
-                Toast.makeText(applicationContext,"Contraseña o correo Incorrecto: $mensaje",Toast.LENGTH_LONG).show()
-            }
-
-        } )*/
     }
 
 }

@@ -12,9 +12,7 @@ import android.widget.Spinner
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.smartFix.recycleraggreparacion.Refactionadapter
 import com.example.smartFix.apiRetrofit.SfApi
-import com.example.smartFix.apiRetrofit.models.RepResponse
-import com.example.smartFix.apiRetrofit.models.refaccion
-import com.example.smartFix.apiRetrofit.models.repData
+import com.example.smartFix.apiRetrofit.models.*
 import com.example.smartFix.databinding.ActivityAgregarReparacionesBinding
 import com.example.smartFix.recycleraggreparacion.RefaccionProvider
 import com.example.smartFix.recycleraggreparacion.Reparacion
@@ -120,10 +118,9 @@ class reparacionesActivity : AppCompatActivity()   {
         var call : Call<RepResponse> = SfApi.instance.agregarReparacion(folio,refaccionid,descripcion)
         call.enqueue(object : Callback<RepResponse> {
             override fun onResponse(call: Call<RepResponse>, response: Response<RepResponse>) {
-                println("no mames si jalo estya madre")
+
                 println(response.body().toString())
             }
-
             override fun onFailure(call: Call<RepResponse>, t: Throwable) {
 
             }
@@ -132,6 +129,7 @@ class reparacionesActivity : AppCompatActivity()   {
 
 
     }
+
     private fun agregarrep(){
         var spinner:Spinner=findViewById(R.id.SPINNER_REPS)
         var contador:Int=0
@@ -148,9 +146,9 @@ class reparacionesActivity : AppCompatActivity()   {
         println("refaccion id  "+repdispo.get(indexadd))
         mandarreparaciones(repdispo.get(indexadd).refaccionid,"falla prueba -"+indexadd)
         println("indice igual a= "+indexadd)
-        //println("reparaciones en lista"+ RefaccionProvider.refaccionlist.get(indexadd))
         initRecyclerview()
     }
+
     private fun cambiarstatus(bundle:Bundle){
         var status:Int=7
         if(!reparacionesFlagna){
@@ -158,27 +156,26 @@ class reparacionesActivity : AppCompatActivity()   {
         }
         estatusid = status
         val tecnicoid: Int? = bundle?.getInt("tecnicoid")
-        val data= Patchstatus(status,tecnicoid)
-        val cal:Call<AsignacionStatusResponse> =SfApi.instance.asignarStatus(folio,data.estatusid,data.tecnicoid)
-        cal.enqueue(object : Callback<AsignacionStatusResponse> {
+        Log.d("Garage","TECNICO ID: $tecnicoid STATUS: $status FOLIO: $folio")
+        val data= PatchData(status,tecnicoid)
+        val cal: Call<AsignacionTecnicoResponse> =SfApi.instance.asignarTecnico(folio,data)
+        cal.enqueue(object : Callback<AsignacionTecnicoResponse> {
             override fun onResponse(
-                call: Call<AsignacionStatusResponse>,
-                response: Response<AsignacionStatusResponse>
+                call: Call<AsignacionTecnicoResponse>,
+                response: Response<AsignacionTecnicoResponse>
             ) {
                 if(response.isSuccessful){
-                    var dataresp: AsignacionStatusResponse =response.body()!!
-                    println("si jalo,  "+ (dataresp?.statusid))
-                    if (!dataresp.error!!){
-
-                    }
+                    Log.d("Garage","SUCCESFULL 3 ")
+                    var dataresp: AsignacionTecnicoResponse =response.body()!!
+                }else{
+                    Log.d("Garage","FAILURE SUCCESFULL 3 $response")
                 }
             }
 
-            override fun onFailure(call: Call<AsignacionStatusResponse>, t: Throwable) {
-                println("no jalo")
+            override fun onFailure(call: Call<AsignacionTecnicoResponse>, t: Throwable) {
+                Log.d("Garage","FAILURE CAMBIAR ESTATUS 3 ${t.toString()}")
             }
         })
     }
 
-    //1a5e2688
 }

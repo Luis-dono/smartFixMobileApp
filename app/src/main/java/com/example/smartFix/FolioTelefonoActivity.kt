@@ -50,33 +50,41 @@ class FolioTelefonoActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     Log.d("Garaje", "RESPONSE SUCCESFULL")
                     var detalleTelefonoData: TelefonData = response.body()!!
+                    if(detalleTelefonoData.rows == 0){
+                        Toast.makeText(applicationContext,"El folio ingresado no existe", Toast.LENGTH_LONG).show()
+                        return
+                    }
                     var detalleActual: com.example.smartFix.apiRetrofit.models.Detalle = detalleTelefonoData.resultados.get(0)
                     Log.d("Garaje", "tec id ${detalleActual.tecnicoid}")
                     if (detalleActual.tecnicoid == 0) {
                         Log.d("Garaje", "ENTRE ALV ")
                         folioProceso(folio, tecnicoid,2)
-                        envioDatos(detalleActual,folio)
+                        envioDatos(detalleActual,folio,2,tecnicoid)
+                        return
                     }else if (detalleActual.tecnicoid != tecnicoid){
                         Toast.makeText(applicationContext,"El teléfono ya se encuentra asignado a otro técnico con id ${detalleActual.tecnicoid}", Toast.LENGTH_LONG).show()
                         return
                     }
                     Log.d("Garaje", "ENTRE AL GET EXITOSAMENTE ${detalleTelefonoData.resultados}")
-                    envioDatos(detalleActual,folio)
+                    envioDatos(detalleActual,folio,detalleActual.estatusid,detalleActual.tecnicoid)
+                }else{
+                    Log.d("Garaje", "ERROR EN EL FOLIO $response")
+                    return
                 }
             }
 
             override fun onFailure(call: Call<TelefonData?>, t: Throwable) {
-                Log.d("Garaje", "${t.toString()}")
+                Log.d("Garaje", "ERROR EN EL FOLIO ${t.toString()}")
             }
         })
     }
 
-    fun envioDatos(detalle: Detalle,folio:String){
+    fun envioDatos(detalle: Detalle,folio:String,estatusid:Int,tecnicoid: Int){
         val intent = Intent(this@FolioTelefonoActivity,TelefonoFormsActivity::class.java)
-
-        intent.putExtra("tecnicoid",detalle.tecnicoid)
+        Log.d("Garage", "TECNICO ID ANTES DEL FORMS $tecnicoid")
+        intent.putExtra("tecnicoid",tecnicoid)
         intent.putExtra("folio",folio)
-        intent.putExtra("estatusid",detalle.estatusid)
+        intent.putExtra("estatusid",estatusid)
         intent.putExtra("marca",detalle.marca)
         intent.putExtra("modelo",detalle.modelo)
         intent.putExtra("modeloid",detalle.modeloid)
@@ -94,7 +102,7 @@ class FolioTelefonoActivity : AppCompatActivity() {
                 if (response.isSuccessful){
                     var dataFolio: AsignacionTecnicoResponse = response.body()!!
                     print(dataFolio.tecnicoid)
-                   // print(dAataFolio.folio)
+
                     Log.d("Garage","DATO ERROR ${dataFolio.error}")
                 }
             }

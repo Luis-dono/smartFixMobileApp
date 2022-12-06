@@ -3,6 +3,7 @@ package com.example.smartFix
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
@@ -22,6 +23,7 @@ class TelefonoFormsActivity : AppCompatActivity(){
         if (activityResult.resultCode == RESULT_OK){
             val estatusid = activityResult.data?.getIntExtra("estatusid",0)
             cambiarProgressBar(estatusid!!)
+            deshabilitarBotones(estatusid)
         }
 
     }
@@ -36,24 +38,33 @@ class TelefonoFormsActivity : AppCompatActivity(){
         tvProgress = findViewById(R.id.tvProgreso)
         var bundle: Bundle  = intent.extras!!
         val estatusid = bundle?.getInt("estatusid")
-       //if(estatusid== 4){
-            btnverReparaciones.isEnabled = true
-        //}
-        if(estatusid>=3){
-            btnAggrep.isEnabled=false
-        }
+        Log.d("botones","$estatusid")
+        deshabilitarBotones(estatusid)
         cambiarProgressBar(estatusid)
         llenarcasillas(bundle);
         btnAggrep.setOnClickListener {
             enviarAReps(bundle)
         }
         btnverReparaciones.setOnClickListener {
-            val intent = Intent(this@TelefonoFormsActivity,manejoreparacionesActivity::class.java)
-            var folioaux: String? =bundle.getString("folio")
-            intent.putExtra("folio",folioaux)
-            startActivity(intent)
+            verReparaciones(bundle)
         }
 
+    }
+
+    fun deshabilitarBotones(estatusid:Int){
+        if(estatusid>=3) btnAggrep.isEnabled = false
+        if (estatusid==4){
+            btnverReparaciones.isEnabled = true
+        }else if (estatusid>=5)btnverReparaciones.isEnabled = false
+    }
+
+    fun verReparaciones(bundle:Bundle){
+        val intent = Intent(this@TelefonoFormsActivity,manejoreparacionesActivity::class.java)
+        var folio: String? =bundle.getString("folio")
+        val tecnicoId: Int? = bundle.getInt("tecnicoid")
+        intent.putExtra("folio",folio)
+        intent.putExtra("tecnicoid",tecnicoId)
+        responseLauncher.launch(intent)
     }
 
     fun enviarAReps(bundle:Bundle){
@@ -74,6 +85,7 @@ class TelefonoFormsActivity : AppCompatActivity(){
             3 -> tvProgress.text = "Por confirmar"
             4 -> tvProgress.text = "Reparando"
             5 -> tvProgress.text = "Listo"
+            6 -> tvProgress.text = "Entregado"
             else -> tvProgress.text = "No aplica"
         }
 

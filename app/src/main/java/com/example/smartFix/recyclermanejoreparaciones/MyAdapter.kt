@@ -27,7 +27,7 @@ class MyAdapter (context: manejoreparacionesActivity, arraylist:ArrayList<ModelC
     private val folio:String
     private val context2:Context
     private lateinit var view:View
-     val arrayList: ArrayList<ModelClass>
+    val arrayList: ArrayList<ModelClass>
     val arrayListaux:ArrayList<ModelClass>
     init {
       this.folio=folio
@@ -35,8 +35,6 @@ class MyAdapter (context: manejoreparacionesActivity, arraylist:ArrayList<ModelC
         this.context2=context
         this.arrayListaux=arraylist
     }
-
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
        val layoutInflater=LayoutInflater.from(parent.context)
@@ -47,11 +45,14 @@ class MyAdapter (context: manejoreparacionesActivity, arraylist:ArrayList<ModelC
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val modelClass=arrayListaux[position]
+        if(modelClass.status.equals("Listo")){
+            holder.itemView.checkboxstatusrep.isEnabled=false
+        }
         holder.itemView.status.text=modelClass.status
         holder.itemView.Tiporeparacion.text=modelClass.tiporefaccion
         holder.itemView.IDrep.text= modelClass.id.toString()
         holder.itemView.checkboxstatusrep.isChecked=modelClass.isSelected
-       holder.itemView.checkboxstatusrep.setOnClickListener {
+        holder.itemView.checkboxstatusrep.setOnClickListener {
            if(holder.itemView.checkboxstatusrep.isChecked&&!modelClass.isSelected){
                arrayListaux[position].isSelected=true
                println("id entrante "+arrayListaux.get(position).id)
@@ -61,9 +62,6 @@ class MyAdapter (context: manejoreparacionesActivity, arraylist:ArrayList<ModelC
            }
        }
 
-
-
-
     }
 
     override fun getItemCount(): Int {
@@ -72,13 +70,10 @@ class MyAdapter (context: manejoreparacionesActivity, arraylist:ArrayList<ModelC
     inner class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
         var checkbox:CheckBox=itemView.findViewById(R.id.checkboxstatusrep)
         init{
-
             itemView.checkboxstatusrep.setOnClickListener { v->
                 val ischecked=(v as CheckBox).isChecked
                 arrayList[adapterPosition].isSelected=ischecked
                 notifyDataSetChanged()
-
-
             }
         }
     }
