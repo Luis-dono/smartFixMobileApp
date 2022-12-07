@@ -15,6 +15,8 @@ import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        Thread.sleep(2000)
+        setTheme(R.style.Theme_MyApplication)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         events()
@@ -62,13 +64,15 @@ class LoginActivity : AppCompatActivity() {
                     intent.putExtra("tecnicoId",datosLogin.id)
                     startActivity(intent)
                     finish()
+                }else{
+                    Toast.makeText(applicationContext,"Contraseña o correo Incorrecto",Toast.LENGTH_LONG).show()
                 }
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                 print(call.toString())
-                Toast.makeText(applicationContext,"Contraseña o correo Incorrecto",Toast.LENGTH_LONG).
-                show()
+                Toast.makeText(applicationContext,"Error en la api",Toast.LENGTH_LONG).show()
+
             }
 
         })

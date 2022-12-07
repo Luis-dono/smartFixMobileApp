@@ -38,6 +38,7 @@
             android:name=".TelefonoFormsActivity"
             android:exported="false" />
         <activity
+            android:theme="@style/SplashTheme"
             android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>

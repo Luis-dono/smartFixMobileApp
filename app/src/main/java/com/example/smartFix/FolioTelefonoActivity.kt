@@ -22,7 +22,6 @@ class FolioTelefonoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_folio_telefono)
-        val bundle: Bundle? = intent.extras
         btnFolio = findViewById(R.id.btnFolio)
         btnFolio.setOnClickListener {
             Log.d("Garaje","Click en el boton buscar")

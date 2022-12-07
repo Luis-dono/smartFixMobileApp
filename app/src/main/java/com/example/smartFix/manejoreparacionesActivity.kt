@@ -28,9 +28,6 @@ class manejoreparacionesActivity : AppCompatActivity() {
     private lateinit var btnGuardar:Button
     private lateinit var  myAdapter:MyAdapter
     private var flagReparacionesListas:Boolean = false
-    // private lateinit var myadapteraux:MyAdapter
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +35,6 @@ class manejoreparacionesActivity : AppCompatActivity() {
         var bundle: Bundle? =intent.extras
         folio= bundle?.getString("folio").toString()
         val tecnicoid: Int? = bundle?.getInt("tecnicoid")
-        println("folio entrante sexo"+folio)
         obtenerreparaciones()
         btnGuardar=findViewById(R.id.guardarreparaciones)
         btnGuardar.setOnClickListener{
@@ -81,12 +77,8 @@ class manejoreparacionesActivity : AppCompatActivity() {
             RecyclerViewReps.adapter=myAdapter
     }
     private fun obtenerreparaciones(){
-            println("entro al metodo")
             var call: Call<ReparacionDisponibleData> = SfApi.instance.obtenerRepaConfirmadas(folio)
             var reparcionesActuales:ArrayList<ReparacionPendiente> =ArrayList()
-
-            println("obtener reparaciones entro aca")
-
             call.enqueue(object: Callback<ReparacionDisponibleData?>{
                 override fun onResponse(call: Call<ReparacionDisponibleData?>, response: Response<ReparacionDisponibleData?>) {
                     if(response.isSuccessful){
@@ -99,7 +91,7 @@ class manejoreparacionesActivity : AppCompatActivity() {
                         println("data actual- "+reparcionesActuales.toString())
                         println("primer elemento "+reparcionesActuales.get(0).descripcion_falla)
                     }else{
-                        println("reesponse gei "+response)
+                        print(response.message())
                     }
 
 
