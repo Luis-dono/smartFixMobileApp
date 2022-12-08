@@ -1,4 +1,4 @@
-package com.example.smartFix
+package com.example.smartFix.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +15,7 @@ import com.example.smartFix.apiRetrofit.SfApi
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.smartFix.R
 import com.example.smartFix.apiRetrofit.models.*
 import com.example.smartFix.recyclermanejoreparaciones.ModelClass
 import com.example.smartFix.recyclermanejoreparaciones.MyAdapter

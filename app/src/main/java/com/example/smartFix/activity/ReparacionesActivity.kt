@@ -1,4 +1,4 @@
-package com.example.smartFix
+package com.example.smartFix.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.KeyEvent
 import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.smartFix.R
 import com.example.smartFix.recycleraggreparacion.Refactionadapter
 import com.example.smartFix.apiRetrofit.SfApi
 import com.example.smartFix.apiRetrofit.models.*
@@ -151,7 +152,7 @@ class reparacionesActivity : AppCompatActivity()   {
             contador++
         }
         println("refaccion id  "+repdispo.get(indexadd))
-        mandarreparaciones(repdispo.get(indexadd).refaccionid,"falla prueba -"+indexadd,contador)
+        mandarreparaciones(repdispo.get(indexadd).refaccionid,"falla -"+spinner.selectedItem.toString(),contador)
         println("indice igual a= "+indexadd)
         initRecyclerview()
     }

@@ -1,28 +1,22 @@
 package com.example.smartFix.recyclermanejoreparaciones
 import android.content.Context
-import android.os.Bundle
-import android.util.Log
-import android.view.Display.Mode
 import android.view.LayoutInflater
 import android.view.View
 
 import android.view.ViewGroup
 import android.widget.CheckBox
-import android.widget.Toast
-import androidx.appcompat.view.menu.ActionMenuItemView
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.smartFix.R
 import com.example.smartFix.apiRetrofit.SfApi
 import com.example.smartFix.apiRetrofit.models.CambioStatusReparacionResponse
 import com.example.smartFix.apiRetrofit.models.PatchDataReparacion
-import com.example.smartFix.manejoreparacionesActivity
+import com.example.smartFix.activity.manejoreparacionesActivity
 import kotlinx.android.synthetic.main.item_reparacion.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import android.content.Intent
-class MyAdapter (context: manejoreparacionesActivity, arraylist:ArrayList<ModelClass>,folio:String) : RecyclerView.Adapter<MyAdapter.ViewHolder>(){
+
+class MyAdapter (context: manejoreparacionesActivity, arraylist:ArrayList<ModelClass>, folio:String) : RecyclerView.Adapter<MyAdapter.ViewHolder>(){
 
     private val folio:String
     private val context2:Context

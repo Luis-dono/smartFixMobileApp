@@ -1,4 +1,4 @@
-package com.example.smartFix
+package com.example.smartFix.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,8 +8,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import com.example.smartFix.R
 
 
 class TelefonoFormsActivity : AppCompatActivity(){
@@ -59,7 +59,7 @@ class TelefonoFormsActivity : AppCompatActivity(){
     }
 
     fun verReparaciones(bundle:Bundle){
-        val intent = Intent(this@TelefonoFormsActivity,manejoreparacionesActivity::class.java)
+        val intent = Intent(this@TelefonoFormsActivity, manejoreparacionesActivity::class.java)
         var folio: String? =bundle.getString("folio")
         val tecnicoId: Int? = bundle.getInt("tecnicoid")
         intent.putExtra("folio",folio)
@@ -68,7 +68,7 @@ class TelefonoFormsActivity : AppCompatActivity(){
     }
 
     fun enviarAReps(bundle:Bundle){
-        val intent = Intent(this@TelefonoFormsActivity,reparacionesActivity::class.java)
+        val intent = Intent(this@TelefonoFormsActivity, reparacionesActivity::class.java)
         var tecnicoid: Int? = bundle?.getInt("tecnicoid")
         var folio: String? = bundle?.getString("folio")
         var modeloid: Int? = bundle?.getInt("modeloid")

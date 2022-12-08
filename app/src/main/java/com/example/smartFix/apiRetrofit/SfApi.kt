@@ -51,10 +51,5 @@ interface SfApi {
         @Field("password") password: String
     ):Call<LoginResponse>
 
-    @GET("/detalle/reparaciones/{folio}")
-    fun getReparaciones(
-        @Path("folio")folio:String?,
-        @Query("rolid")rolid:Int?
-    )
 
 }

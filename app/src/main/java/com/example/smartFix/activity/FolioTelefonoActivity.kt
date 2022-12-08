@@ -1,4 +1,4 @@
-package com.example.smartFix
+package com.example.smartFix.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.example.smartFix.R
 import com.example.smartFix.apiRetrofit.SfApi
 import com.example.smartFix.apiRetrofit.models.AsignacionTecnicoResponse
 import com.example.smartFix.apiRetrofit.models.Detalle
@@ -79,7 +80,7 @@ class FolioTelefonoActivity : AppCompatActivity() {
     }
 
     fun envioDatos(detalle: Detalle,folio:String,estatusid:Int,tecnicoid: Int){
-        val intent = Intent(this@FolioTelefonoActivity,TelefonoFormsActivity::class.java)
+        val intent = Intent(this@FolioTelefonoActivity, TelefonoFormsActivity::class.java)
         Log.d("Garage", "TECNICO ID ANTES DEL FORMS $tecnicoid")
         intent.putExtra("tecnicoid",tecnicoid)
         intent.putExtra("folio",folio)

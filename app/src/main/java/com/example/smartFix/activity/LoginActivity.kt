@@ -1,4 +1,4 @@
-package com.example.smartFix
+package com.example.smartFix.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.example.smartFix.R
 import com.example.smartFix.apiRetrofit.SfApi
 import com.example.smartFix.apiRetrofit.models.LoginResponse
 import retrofit2.Call
@@ -60,7 +61,7 @@ class LoginActivity : AppCompatActivity() {
                         Toast.makeText(applicationContext,"Ese correo no es de tecnico",Toast.LENGTH_LONG).show()
                         return
                     }
-                    val intent = Intent(this@LoginActivity,FolioTelefonoActivity::class.java)
+                    val intent = Intent(this@LoginActivity, FolioTelefonoActivity::class.java)
                     intent.putExtra("tecnicoId",datosLogin.id)
                     startActivity(intent)
                     finish()

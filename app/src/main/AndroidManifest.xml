@@ -18,28 +18,28 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".manejoreparacionesActivity"
+            android:name=".activity.manejoreparacionesActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".reparacionesActivity"
+            android:name=".activity.reparacionesActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".FolioTelefonoActivity"
+            android:name=".activity.TelefonoFormsActivity"
             android:exported="false" />
         <activity
-            android:name=".TelefonoFormsActivity"
+            android:name=".activity.FolioTelefonoActivity"
             android:exported="false" />
         <activity
             android:theme="@style/SplashTheme"
-            android:name=".LoginActivity"
+            android:name=".activity.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

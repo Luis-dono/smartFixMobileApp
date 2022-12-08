@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".reparacionesActivity">
+    tools:context=".activity.reparacionesActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerRefacciones"
@@ -32,14 +32,13 @@
         android:id="@+id/checkboxded"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="328dp"
         android:layout_gravity="bottom"
-
-        android:layout_marginStart="196dp"
+        android:layout_marginStart="290dp"
+        android:text="No Aplica"
         android:layout_marginBottom="60dp"
         app:layout_constraintBottom_toTopOf="@+id/SPINNER_REPS"
-        tools:layout_editor_absoluteY="27dp"
-       />
+        tools:layout_editor_absoluteX="338dp"
+        tools:layout_editor_absoluteY="27dp" />
 
     <Button
         android:id="@+id/guardar"
