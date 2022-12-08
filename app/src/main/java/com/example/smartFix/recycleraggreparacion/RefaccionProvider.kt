@@ -13,6 +13,10 @@ class RefaccionProvider {
         fun agregarrefaccion(refaccion: refaccion){
             refaccionlist.add(refaccion)
         }
+
+        fun limpiarRefacciones(){
+            refaccionlist.clear()
+        }
     }
 
 }

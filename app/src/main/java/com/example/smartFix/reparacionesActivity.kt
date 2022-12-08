@@ -5,10 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.Spinner
+import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.smartFix.recycleraggreparacion.Refactionadapter
 import com.example.smartFix.apiRetrofit.SfApi
@@ -45,6 +42,7 @@ class reparacionesActivity : AppCompatActivity()   {
             }
         }
         folio= bundle?.getString("folio")!!
+        RefaccionProvider.limpiarRefacciones()
         val modeloid:Int? = bundle?.getInt("modeloid")
         initRecyclerview()
         obtenerReparaciones(modeloid!!)
@@ -58,6 +56,7 @@ class reparacionesActivity : AppCompatActivity()   {
             val intent = Intent()
             intent?.putExtra("estatusid",estatusid)
             setResult(RESULT_OK,intent)
+            Toast.makeText(applicationContext,"Reparaciones agregadas", Toast.LENGTH_LONG).show()
         }
 
     }
@@ -114,15 +113,25 @@ class reparacionesActivity : AppCompatActivity()   {
         }
         return listilla
     }
-    private fun mandarreparaciones(refaccionid:Int,descripcion:String){
+
+    private fun mandarreparaciones(refaccionid:Int,descripcion:String,contador:Int){
         var call : Call<RepResponse> = SfApi.instance.agregarReparacion(folio,refaccionid,descripcion)
         call.enqueue(object : Callback<RepResponse> {
             override fun onResponse(call: Call<RepResponse>, response: Response<RepResponse>) {
+                if(response.isSuccessful){
+                    println(response.body().toString())
+                    RefaccionProvider.agregarrefaccion(refaccion(repdispo.get(contador).marca,
+                        repdispo.get(contador).modelo,repdispo.get(contador).tipo,repdispo.get(contador).precio))
+                    initRecyclerview()
+                    Log.d("Garage","Reparacion agregada")
+                }else{
+                    Log.d("Garage","ESTA REPARACION YA EXISTE ")
+                    Toast.makeText(applicationContext,"Esta reparacion ya existe", Toast.LENGTH_LONG).show()
+                }
 
-                println(response.body().toString())
             }
             override fun onFailure(call: Call<RepResponse>, t: Throwable) {
-
+                Log.d("Garage","Falla al querer mandar la reparacion")
             }
 
         } )
@@ -136,15 +145,13 @@ class reparacionesActivity : AppCompatActivity()   {
         var indexadd:Int=0
         while(contador<sublista.size){
             if(spinner.selectedItem.toString().equals(repdispo.get(contador).tipo)){
-                RefaccionProvider.agregarrefaccion(refaccion(repdispo.get(contador).marca,
-                    repdispo.get(contador).modelo,repdispo.get(contador).tipo,repdispo.get(contador).precio))
                 indexadd=contador
                 break
             }
             contador++
         }
         println("refaccion id  "+repdispo.get(indexadd))
-        mandarreparaciones(repdispo.get(indexadd).refaccionid,"falla prueba -"+indexadd)
+        mandarreparaciones(repdispo.get(indexadd).refaccionid,"falla prueba -"+indexadd,contador)
         println("indice igual a= "+indexadd)
         initRecyclerview()
     }

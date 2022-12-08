@@ -5,7 +5,5 @@ data class refaccion (var marca:String,//pieza
                       val refaccion:String,
                       val precio:String
                      ){
-
-
 }
 

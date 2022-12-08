@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
 import android.widget.Button
+import android.widget.Toast
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -43,9 +44,11 @@ class manejoreparacionesActivity : AppCompatActivity() {
                 cambiarEstatus(folio,tecnicoid!!,5)
                 val intent = Intent()
                 intent?.putExtra("estatusid",5)
+                Toast.makeText(applicationContext,"Reparaciones finalizadas", Toast.LENGTH_LONG).show()
                 setResult(RESULT_OK,intent)
             }else{
                 Log.d("Garage","LAS REPARACIONES NO HAN FINALIZADO FLAG: $flagReparacionesListas")
+                Toast.makeText(applicationContext,"Reparaciones no finalizadas por completo", Toast.LENGTH_LONG).show()
 
             }
         }
